@@ -37,3 +37,20 @@ stages:
           ArtifactName: 'manifest'
           publishLocation: 'Container'
 
+- stage: Build
+  jobs:
+  - job: 
+    steps:
+      - task: DownloadBuildArtifacts@0
+        inputs:
+          buildType: 'current'
+          downloadType: 'single'
+          downloadPath: '$(System.ArtifactsDirectory)'
+          artifactName: 'manifest'
+      
+      - task: Bash@3
+        inputs:
+          targetType: 'inline'
+          script: |
+            AMI_ID=$(jq -r '.builds[-1].artifact_id' $(System.ArtifactsDirectory)/manifest/manifest.json | cut -d ":" -f2)
+            echo $AMI_ID

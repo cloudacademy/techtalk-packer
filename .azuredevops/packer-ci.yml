@@ -27,7 +27,7 @@ stages:
         inputs:
           connectedServiceType: 'aws'
           connectedServiceAWS: 'aws'
-          templatePath: '$(Build.SourcesDirectory)/images/image'
+          templatePath: '$(Build.SourcesDirectory)/images/image.json'
           command: 'build'
           force: true
       

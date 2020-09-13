@@ -18,17 +18,22 @@ stages:
         inputs:
           version:
       
+      - task: Bash@3
+        inputs:
+          targetType: 'inline'
+          script: 'ls $(Build.SourcesDirectory)'
+
       - task: Packer@1
         inputs:
           connectedServiceType: 'aws'
           connectedServiceAWS: 'aws'
-          templatePath: '$(Build.SourcesDirectory)\images\image'
+          templatePath: '$(Build.SourcesDirectory)/images/image'
           command: 'build'
           force: true
       
       - task: PublishBuildArtifacts@1
         inputs:
-          PathtoPublish: '$(Build.SourcesDirectory)\images'
+          PathtoPublish: '$(Build.SourcesDirectory)/images'
           ArtifactName: 'manifest'
           publishLocation: 'Container'
 

@@ -58,4 +58,5 @@ stages:
           script: |
             AMI_ID=$(jq -r '.builds[-1].artifact_id' $(System.ArtifactsDirectory)/manifest/manifest.json | cut -d ":" -f2)
             echo $AMI_ID
+            terraform init
             terraform  apply -auto-approve -var 'amid=$AMI_ID' $(Build.SourcesDirectory)/redisserver

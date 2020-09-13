@@ -4,35 +4,11 @@ trigger:
     - master
   paths:
     include:
-    - VMware/*
+    - images/*
 
-schedules:
-- cron: "0 1 * * 0"
-  displayName: Weekly Sunday build
-  branches:
-    include:
-    - master
-  always: true
-
-pool:
-    vmImage: windows-2019
-
-steps:
-
-- task: CopyFiles@2
-
-  displayName: 'Copy Packer Files to Artifacts'
-
-  inputs:
-
-    SourceFolder: VMware
-
-    TargetFolder: '$(Build.ArtifactStagingDirectory)'
-    cleanTargetFolder: true
+stages:
+- stage: Build
 
 
-
-- task: PublishPipelineArtifact@1
-  inputs:
-    targetPath: '$(Build.ArtifactStagingDirectory)'
-    artifact: PackerConfig
+- stage: Deploy
+  dependsOn: Build    # this stage runs after Test

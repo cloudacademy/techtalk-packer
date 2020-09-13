@@ -60,6 +60,6 @@ stages:
             echo $AMI_ID
             terraform init
             terraform  apply -auto-approve -var 'amid=$AMI_ID' $(Build.SourcesDirectory)/redisserver
-          env:
+        env:
             AWS_ACCESS_KEY: $(AWS_ACCESS_KEY)
             AWS_SECRET_KEY: $(AWS_SECRET_KEY)

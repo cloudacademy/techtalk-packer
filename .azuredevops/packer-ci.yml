@@ -48,9 +48,14 @@ stages:
           downloadPath: '$(System.ArtifactsDirectory)'
           artifactName: 'manifest'
       
+      - task: TerraformInstaller@0
+        inputs:
+          terraformVersion: '0.12.3'
+      
       - task: Bash@3
         inputs:
           targetType: 'inline'
           script: |
             AMI_ID=$(jq -r '.builds[-1].artifact_id' $(System.ArtifactsDirectory)/manifest/manifest.json | cut -d ":" -f2)
             echo $AMI_ID
+            terraform  apply -auto-approve -var 'amid=$AMI_ID' $(Build.SourcesDirectory)/redisserver

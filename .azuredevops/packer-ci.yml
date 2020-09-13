@@ -5,13 +5,19 @@ trigger:
   paths:
     include:
     - images/*
+  
+variables:
+- group: AWS
 
 stages:
 - stage: Build
   jobs:
   - job: A
     steps:
-
+      - task: PackerTool@0
+        inputs:
+          version: latest
+      
 
 - stage: Deploy
   dependsOn: Build    # this stage runs after Test

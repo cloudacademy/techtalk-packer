@@ -22,13 +22,13 @@ stages:
         inputs:
           connectedServiceType: 'aws'
           connectedServiceAWS: 'aws'
-          templatePath: '$(Build.SourcesDirectory)/images/image'
+          templatePath: '$(Build.SourcesDirectory)\images\image'
           command: 'build'
           force: true
       
       - task: PublishBuildArtifacts@1
         inputs:
-          PathtoPublish: '$(Build.SourcesDirectory)/images'
+          PathtoPublish: '$(Build.SourcesDirectory)\images'
           ArtifactName: 'manifest'
           publishLocation: 'Container'
 

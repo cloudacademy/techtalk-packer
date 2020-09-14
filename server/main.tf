@@ -86,7 +86,7 @@ resource "aws_instance" "web" {
   associate_public_ip_address = true
 
   tags = {
-    Name = "Learn-Packer"
+    Name = "webserver"
   }
 }
 

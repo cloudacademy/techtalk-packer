@@ -63,8 +63,8 @@ stages:
           script: |
             AMI_ID=$(jq -r '.builds[-1].artifact_id' $(System.ArtifactsDirectory)/manifest/manifest.json | cut -d ":" -f2)
             echo $AMI_ID
-            terraform init $(Build.SourcesDirectory)/redisserver
-            terraform  apply -auto-approve -var "amid=$AMI_ID" $(Build.SourcesDirectory)/redisserver
+            terraform init $(Build.SourcesDirectory)/server
+            terraform  apply -auto-approve -var "amid=$AMI_ID" $(Build.SourcesDirectory)/server
         env:
             AWS_ACCESS_KEY: $(AWS_ACCESS_KEY)
             AWS_SECRET_KEY: $(AWS_SECRET_KEY)
